@@ -1,9 +1,9 @@
 import React, { Fragment, useEffect } from "react";
 import { CgMouse } from "react-icons/cg";
 import "./Home.css";
-import Product from "./Product.js";
+import ProductCard from "./ProductCard.js";
 import Metadata from "../layout/Metadata";
-import { getProduct } from "../../actions/productAction";
+import { clearErrors, getProducts } from "../../actions/productAction";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "../layout/Loader/Loader";
 import toast, { Toaster } from "react-hot-toast";
@@ -24,10 +24,11 @@ function Home() {
 
   useEffect(() => {
     if (error) {
-      return toast.error(error);
+      toast.error(error);
+      dispatch(clearErrors());
     }
 
-    dispatch(getProduct());
+    dispatch(getProducts());
   }, [dispatch, error]);
 
   return (
@@ -53,7 +54,7 @@ function Home() {
           <div className="container" id="container">
             {products ? (
               products &&
-              products.map((product) => <Product product={product} />)
+              products.map((product) => <ProductCard product={product} />)
             ) : (
               <p>Something went wrong.. Refresh Again!</p>
             )}

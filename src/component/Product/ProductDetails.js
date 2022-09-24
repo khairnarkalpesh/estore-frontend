@@ -9,7 +9,7 @@ import Rating from "react-rating-stars-component";
 import "./ProductDetails.css";
 import ReviewCard from "./ReviewCard.js"
 
-const ProductDetails = ({ match }) => {
+const ProductDetails = () => {
   const dispatch = useDispatch();
   const { product, loading, error } = useSelector(
     (state) => state.productDetails
@@ -28,6 +28,7 @@ const ProductDetails = ({ match }) => {
         value: product.ratings,
         readOnly: true,
         precision: 0.5,
+        edit: false
       })
     : console.log("none");
 
@@ -100,10 +101,10 @@ const ProductDetails = ({ match }) => {
 
       {product ? (
         <div className="reviews">
-          {product.reviews && product.reviews.map((review) => <ReviewCard review={review}></ReviewCard>)}
+          {product.reviews.length > 0 ? ( product.reviews.map((review) => <ReviewCard review={review}></ReviewCard>)) : (<h1>No review found</h1>)}
         </div>
       ) : ( 
-        <h1>No</h1>
+        <h1>Someting went wrong</h1>
       )}
 
     </>
