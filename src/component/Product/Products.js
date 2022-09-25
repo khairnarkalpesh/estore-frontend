@@ -26,6 +26,7 @@ const Products = () => {
 
   const [price, setPrice] = React.useState([0, 2500]);
   const [category, setCategory] = useState("");
+  const [ratings, setRatings] = useState(0)
 
   const priceHandler = (event, newPrice) => {
     setPrice(newPrice);
@@ -45,8 +46,8 @@ const Products = () => {
   };
 
   useEffect(() => {
-    dispatch(getProducts(keyword, currentPage, price, category));
-  }, [dispatch, keyword, currentPage, price, category]);
+    dispatch(getProducts(keyword, currentPage, price, category, ratings));
+  }, [dispatch, keyword, currentPage, price, category, ratings]);
 
   let count = filteredProductsCount;
 
@@ -79,7 +80,7 @@ const Products = () => {
             />
 
             <p>Category</p>
-            <div className="categoryBox">
+            <ul className="categoryBox">
               {categories.map((category) => (
                 <li
                   className="category-link"
@@ -89,7 +90,18 @@ const Products = () => {
                   {category}
                 </li>
               ))}
-            </div>
+            </ul>
+
+            <fieldset>
+              <p>Rating above</p>
+              <Slider 
+              value={ratings}
+              onChange={(e, newRatings) => setRatings(newRatings)}
+              aria-labelledby="continuos-slider"
+              min={0}
+              max={5}
+              valueLabelDisplay="auto" />
+            </fieldset>
           </div>
 
           {resultPerPage < productsCount && (
