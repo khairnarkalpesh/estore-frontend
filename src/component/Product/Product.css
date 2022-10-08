@@ -87,6 +87,9 @@
 }
 
 @media screen and (max-width: 600px) {
+  .products {
+    margin: auto 1rem;
+  }
   .filterBox {
     width: 20vmax;
     position: static;

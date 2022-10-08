@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
 // import Carousel from "react-material-ui-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from 'react-responsive-carousel';
+import { Carousel } from "react-responsive-carousel";
 import { useSelector, useDispatch } from "react-redux";
 import { getProductDetails } from "../../actions/productAction";
 import { useParams } from "react-router-dom";
 import Rating from "react-rating-stars-component";
 import "./ProductDetails.css";
-import ReviewCard from "./ReviewCard.js"
+import ReviewCard from "./ReviewCard.js";
+import Metadata from "../layout/Metadata";
 
 const ProductDetails = () => {
   const dispatch = useDispatch();
@@ -28,27 +29,28 @@ const ProductDetails = () => {
         value: product.ratings,
         readOnly: true,
         precision: 0.5,
-        edit: false
+        edit: false,
       })
     : console.log("none");
 
   return (
     <>
       <div className="ProductDetails">
-          <Carousel>
-            {product ? (
-              product.images.map((item, i) => (
-                <img
-                  className="carouselImage"
-                  key={item.url}
-                  src="https://i.ibb.co/DRST11n/1.webp"
-                  alt={`${i} Slide`}
-                />
-              ))
-            ) : (
-              <p>?</p>
-            )}
-          </Carousel>
+        {product ? <Metadata title={`${product.name} | eCommerce`} /> : <Metadata title={`Error | eCommerce`} />}
+        <Carousel>
+          {product ? (
+            product.images.map((item, i) => (
+              <img
+                className="carouselImage"
+                key={item.url}
+                src="https://i.ibb.co/DRST11n/1.webp"
+                alt={`${i} Slide`}
+              />
+            ))
+          ) : (
+            <p>?</p>
+          )}
+        </Carousel>
 
         {product ? (
           <div>
@@ -93,20 +95,26 @@ const ProductDetails = () => {
               Submit Review
             </button>
           </div>
-        ) : (<p>Something went wrong!</p>)}
-        
+        ) : (
+          <p>Something went wrong!</p>
+        )}
       </div>
 
       <h3 className="reviewsHeading">Reviews</h3>
 
       {product ? (
         <div className="reviews">
-          {product.reviews.length > 0 ? ( product.reviews.map((review) => <ReviewCard review={review}></ReviewCard>)) : (<h1>No review found</h1>)}
+          {product.reviews.length > 0 ? (
+            product.reviews.map((review) => (
+              <ReviewCard review={review}></ReviewCard>
+            ))
+          ) : (
+            <h1>No review found</h1>
+          )}
         </div>
-      ) : ( 
+      ) : (
         <h1>Someting went wrong</h1>
       )}
-
     </>
   );
 };

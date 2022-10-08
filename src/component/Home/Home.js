@@ -23,13 +23,12 @@ function Home() {
   );
 
   useEffect(() => {
+    dispatch(getProducts());
     if (error) {
       toast.error(error);
       dispatch(clearErrors());
     }
-
-    dispatch(getProducts());
-  }, [dispatch, error]);
+  }, [dispatch, toast]);
 
   return (
     <>

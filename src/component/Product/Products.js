@@ -7,6 +7,8 @@ import ProductCard from "../Home/ProductCard";
 import { useParams } from "react-router-dom";
 import Pagination from "react-js-pagination";
 import Slider from "@mui/material/Slider";
+import toast, { Toaster } from "react-hot-toast";
+import Metadata from "../layout/Metadata"
 
 const categories = [
   "laptop",
@@ -26,7 +28,7 @@ const Products = () => {
 
   const [price, setPrice] = React.useState([0, 2500]);
   const [category, setCategory] = useState("");
-  const [ratings, setRatings] = useState(0)
+  const [ratings, setRatings] = useState(0);
 
   const priceHandler = (event, newPrice) => {
     setPrice(newPrice);
@@ -46,7 +48,13 @@ const Products = () => {
   };
 
   useEffect(() => {
+
     dispatch(getProducts(keyword, currentPage, price, category, ratings));
+
+    if (error) {
+      toast.error(error);
+      // dispatch(clearErrors());
+    }
   }, [dispatch, keyword, currentPage, price, category, ratings]);
 
   let count = filteredProductsCount;
@@ -57,6 +65,7 @@ const Products = () => {
         <Loader></Loader>
       ) : (
         <Fragment>
+          <Metadata title = {`Products | eCommerce`}/>
           <h2 className="productsHeading">Products</h2>
           <div className="products">
             {products ? (
@@ -77,7 +86,7 @@ const Products = () => {
               valueLabelDisplay="auto"
               min={0}
               max={25000}
-            />
+            /> 
 
             <p>Category</p>
             <ul className="categoryBox">
@@ -94,13 +103,14 @@ const Products = () => {
 
             <fieldset>
               <p>Rating above</p>
-              <Slider 
-              value={ratings}
-              onChange={(e, newRatings) => setRatings(newRatings)}
-              aria-labelledby="continuos-slider"
-              min={0}
-              max={5}
-              valueLabelDisplay="auto" />
+              <Slider
+                value={ratings}
+                onChange={(e, newRatings) => setRatings(newRatings)}
+                aria-labelledby="continuos-slider"
+                min={0}
+                max={5}
+                valueLabelDisplay="auto"
+              />
             </fieldset>
           </div>
 
@@ -124,6 +134,7 @@ const Products = () => {
           )}
         </Fragment>
       )}
+      <Toaster position="bottom-center" reverseOrder={false} />
     </Fragment>
   );
 };
