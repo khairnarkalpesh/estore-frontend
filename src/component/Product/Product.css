@@ -36,7 +36,7 @@
   border-radius: 0 5px 5px 0;
 }
 
-.page-link {
+.page-navlink {
   text-decoration: none;
   font: 300 0.7vmax "Roboto";
   color: rgb(80, 80, 80);
@@ -47,7 +47,7 @@
   background-color: rgb(230, 230, 230);
 }
 
-.page-item:hover .page-link {
+.page-item:hover .page-navlink {
   color: rgb(0, 0, 0);
 }
 
@@ -96,7 +96,7 @@
     margin: auto;
   }
 
-  .page-link {
+  .page-navlink {
     font: 300 1.7vmax "Roboto";
   }
   .category-link {

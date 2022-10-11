@@ -13,7 +13,7 @@ const Product = ({ product }) => {
   };
 
   return (
-    <Link className="productCard" to={`product/${product._id}`}>
+    <Link className="productCard" to={`../product/${product._id}`}>
       <img src="https://i.ibb.co/DRST11n/1.webp" alt={product.name} />
       <p>{product.name}</p>
 

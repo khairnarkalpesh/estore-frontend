@@ -51,10 +51,10 @@ const Products = () => {
 
     dispatch(getProducts(keyword, currentPage, price, category, ratings));
 
-    if (error) {
-      toast.error(error);
-      // dispatch(clearErrors());
-    }
+    // if (error) {
+    //   toast.error(error);
+    //   dispatch(clearErrors());
+    // }
   }, [dispatch, keyword, currentPage, price, category, ratings]);
 
   let count = filteredProductsCount;
@@ -126,7 +126,7 @@ const Products = () => {
                 firstPageText="1st"
                 lastPageText="Last"
                 itemClass="page-item"
-                linkClass="page-link"
+                linkClass="page-navlink"
                 activeClass="pageItemActive"
                 activeLinkClass="pageLinkActive"
               />
