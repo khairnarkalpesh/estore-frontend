@@ -78,6 +78,7 @@ const LoginSignUp = () => {
 
     if (isAuthenticated) {
       history("/account");
+      toast.success("Login Successful")
     }
   }, [dispatch, error, history, isAuthenticated]);
 
